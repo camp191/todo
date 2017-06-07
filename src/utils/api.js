@@ -31,5 +31,16 @@ export default {
         .then((response) => {
             return response.data
         })
+    },
+
+    updateTodo: (updateId) => {
+        let encodeURI = window.encodeURI( host + 'todos/' + updateId )
+
+        return axios.patch(encodeURI, {
+            completed: true
+        })
+        .then((response) => {
+            return response.data
+        })
     }
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import api from '../utils/api'
 import TodoAdd from './TodoAdd'
+import List from './List'
 
 function Todo(props) {
     return (
@@ -9,10 +10,11 @@ function Todo(props) {
             {props.todos.map((todo) => {
                 return (
                     <li key={todo._id}>
-                        {todo.text}
-                        <button onClick={props.onDelete.bind(null, todo._id)}>
-                            Delete
-                        </button>
+                        <List
+                            onUpdate={props.onUpdate}
+                            onDelete={props.onDelete}
+                            todo={todo}
+                        />
                     </li>)
             })}
         </ul>
@@ -75,6 +77,10 @@ class App extends Component {
             })
     }
 
+    handleDone(todoId) {
+        api.updateTodo(todoId)
+    }
+
     render() {
         return (
             <div>
@@ -84,7 +90,8 @@ class App extends Component {
                  ? <h1>Loading</h1>
                  : <Todo 
                         todos={this.state.todos}
-                        onDelete={this.handleDelete} 
+                        onDelete={this.handleDelete}
+                        onUpdate={this.handleDone}
                     />}
                 <h2>Add List</h2>
                 <TodoAdd 
