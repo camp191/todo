@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import propTypes from 'prop-types'
+import { TextField, RaisedButton } from 'material-ui'
 
-class TodoAdd extends Component {
+import styles from './TodoInput.scss'
+
+class TodoInput extends Component {
     constructor(props) {
         super(props)
 
@@ -37,30 +40,32 @@ class TodoAdd extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <label htmlFor="text">{this.props.label}</label>
-                <input 
-                    type="text"
-                    autoComplete='off'
-                    placeholder={this.props.placeholder}
+            <form className={styles.todoInput} onSubmit={this.handleSubmit}>
+                <TextField
+                    style={{width: '70%', marginTop: '20px'}}
+                    inputStyle={{autocomplete: 'none'}}
+                    hintText="ex. Eat Lunch"
+                    floatingLabelText={this.props.placeholder}
                     value={this.state.text}
+                    floatingLabelFixed={true}
+                    autoComplete="none"
                     onChange={this.handleChange}
                 />
-                <button
+                <RaisedButton
+                    style={{marginLeft: '20px'}}
+                    label="Add List" 
+                    primary={true} 
                     type="submit"
                     disabled={this.state.text === ''}
-                >
-                    Add List
-                </button>
+                />
             </form>
         )
     }
 }
 
-TodoAdd.propTypes = {
-    label: propTypes.string.isRequired,
+TodoInput.propTypes = {
     onAdd: propTypes.func.isRequired,
     placeholder: propTypes.string.isRequired
 }
 
-export default TodoAdd
+export default TodoInput

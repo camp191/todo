@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-let host = 'http://localhost:3000/'
+let host = 'https://react-material-todo.herokuapp.com'
 
 export default {
     fetchTodo: (todos) => {
@@ -33,11 +33,11 @@ export default {
         })
     },
 
-    updateTodo: (updateId) => {
+    updateTodo: (updateId, done) => {
         let encodeURI = window.encodeURI( host + 'todos/' + updateId )
 
         return axios.patch(encodeURI, {
-            completed: true
+            completed: done
         })
         .then((response) => {
             return response.data
