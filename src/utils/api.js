@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-let host = 'https://react-material-todo.herokuapp.com'
+let host = 'http://localhost:3000/'
 
 export default {
     fetchTodo: (todos) => {
